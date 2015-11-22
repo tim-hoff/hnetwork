@@ -144,11 +144,10 @@
   [data magnitude lrs size  & {:keys [verbose-flag] :or {verbose-flag false}}]
   (let [dt (expand data magnitude)
         w (weight-gen size)
-        w2 (refeed dt w lrs)
-        ]
-    (when verbose-flag (println "Initial Weights") 
+        w2 (refeed dt w lrs)]
+    (when verbose-flag (println "Initial Weights")
       (println "w1")
       (pm (first w))
       (println "w2")
       (pm (last w)))
-     w2))
+    w2))
