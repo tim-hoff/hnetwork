@@ -31,11 +31,12 @@
       (recur (conj! acc (apply fn (map peek t))) (map pop t))))); handle scaling for negative attributes
 
 (defn bias
-  "biases an ANN"
+  "biases an ANN, the wrong way."
   [lst]
     (mapv (fn [x] (mapv #(+ % 0.0001) x)) lst))
 
 (defn scaled 
+  "scales between max and min properly."
   [x mn mx]
   (/ (- x mn) (- mx mn)))
 
@@ -57,16 +58,19 @@
   (mapv #(mapv function %) matrix))
 
 (defn sigmoid-prime
+  "sigmoid prime, used when feeding. yo."
   [z]
   (let [enz (Math/exp (* -1 z))]; e^(-z)])
     (/ enz (Math/pow (+ 1 enz) 2)))); enz/(1+enz)^2)
 
 (defn pmm [m]
+  "pm format wrapper, six significant digits"
   (pm m {:formatter (fn [x] (format "%.6f" (double x)))}))
 
 (defn feed-one
   "feeds data into nn and returns adjusted weights"
-  [row w lr & {:keys [training] :or {training false}}]
+  [row w lr & {:keys [training]
+               :or {training false}}]
   (let [x (pop row)
         y (peek row)
         [w1 w2] w
