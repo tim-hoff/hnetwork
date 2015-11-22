@@ -1,15 +1,11 @@
 (ns hnetwork.core)
 (use 'clojure.core.matrix) ; math
 (use 'clojure.math.combinatorics) ; math
-
 (set-current-implementation :vectorz); matrix computations
+
 (require '[clojure.java.io :as io]); io resources
 (require '[incanter.core :as i]); statistics library
 (require '[incanter.datasets :as ds]); datasets, get-dataset
-(require '[incanter.excel :as xls]); excel
-(require '[incanter.stats :as stat]); stats
-(require '[incanter.charts :as chart]); charts
-(require '[incanter.io :as iio]); csv
 
 (defn gen-matrix
   "generates a `r` by `c` matrix with random weights between -1 and 1."
